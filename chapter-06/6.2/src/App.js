@@ -7,6 +7,12 @@ function App() {
   return (
     <ColorList
       colors={colors}
+      onRateColor={(id, rating) => {
+        const newColor = colors.map((color) =>
+          color.id === id ? { ...color, rating } : color
+        );
+        setColors(newColor);
+      }}
       onRemoveColor={(id) => {
         const newColor = colors.filter((color) => color.id !== id);
         setColors(newColor);
