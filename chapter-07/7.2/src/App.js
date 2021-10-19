@@ -18,11 +18,34 @@ function useWindowSize() {
   return [width, height];
 }
 
+function useMousePosition() {
+  const [x, setX] = useState(0);
+  const [y, setY] = useState(0);
+
+  const setPosition = ({ x, y }) => {
+    setX(x);
+    setY(y);
+  };
+
+  useLayoutEffect(() => {
+    window.addEventListener('mousemove', setPosition);
+    return () => window.removeEventListener('mousemove', setPosition);
+  }, []);
+
+  return [x, y];
+}
+
 function App() {
   const [w, h] = useWindowSize();
+  const [left, top] = useMousePosition();
   return (
     <div>
-      {w}x{h}
+      <p>
+        {w}x{h}
+      </p>
+      <p>
+        mousePosition: {left} x {top}
+      </p>
     </div>
   );
 }
