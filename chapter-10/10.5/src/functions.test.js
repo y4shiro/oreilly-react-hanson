@@ -1,4 +1,4 @@
-import { timesTwo, order } from './functions';
+import { timesTwo, order, sum, subtract } from './functions';
 
 test('Multiplies by two', () => {
   expect(timesTwo(4)).toBe(8);
@@ -33,4 +33,16 @@ test('Build an order object', () => {
     total: 77,
   };
   expect(order(menuItems)).toEqual(result);
+});
+
+describe('Math functions', () => {
+  test('Multiplies by two', () => {
+    expect(timesTwo(4)).toBe(8);
+  });
+  test('Adds two numbers', () => {
+    expect(sum(4, 2)).toBe(6);
+  });
+  test('Subtracts two numbers', () => {
+    expect(subtract(4, 2)).toBe(2);
+  });
 });
