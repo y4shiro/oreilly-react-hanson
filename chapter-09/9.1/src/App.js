@@ -1,17 +1,36 @@
-import React, { useState, Suspense, lazy } from 'react';
-import Agreement from './Agreement';
-import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader';
+import React, { Suspense } from 'react';
+import ErrorBoundary from './ErrorBoundary';
+import GridLoader from 'react-spinners/GridLoader';
 
-const Main = lazy(() => import('./Main'));
+function createResource(pending) {
+  let error, response;
+  pending.then((r) => (response = r)).catch((e) => (error = e));
+  return {
+    read() {
+      if (error) throw error;
+      if (response) return response;
+      throw pending;
+    },
+  };
+}
+
+const threeSecondsToGnar = new Promise((resolves) =>
+  setTimeout(() => resolves({ gnar: 'gnarly!' }), 3000)
+);
+
+const resource = createResource(threeSecondsToGnar);
+
+function Gnar() {
+  const result = resource.read();
+  return <h1>Gnar: {result.gnar}</h1>;
+}
 
 export default function App() {
-  const [agree, setAgree] = useState(false);
-
-  if (!agree) return <Agreement onAgree={() => setAgree(true)} />;
-
   return (
-    <Suspense fallback={<ClimbingBoxLoader />}>
-      <Main />
+    <Suspense fallback={<GridLoader />}>
+      <ErrorBoundary>
+        <Gnar />
+      </ErrorBoundary>
     </Suspense>
   );
 }
