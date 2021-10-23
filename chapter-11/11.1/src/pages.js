@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, Outlet } from 'react-router-dom';
 
 export function Home() {
   return (
@@ -19,6 +19,40 @@ export function About() {
   return (
     <div>
       <h1>[About]</h1>
+      <Outlet />
+    </div>
+  );
+}
+
+export function History() {
+  return (
+    <div>
+      <h2>Our History</h2>
+      <p>
+        あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。
+      </p>
+    </div>
+  );
+}
+
+export function Services() {
+  return (
+    <div>
+      <h2>Our Services</h2>
+      <p>
+        あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。
+      </p>
+    </div>
+  );
+}
+
+export function Location() {
+  return (
+    <div>
+      <h2>Our Location</h2>
+      <p>
+        あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。
+      </p>
     </div>
   );
 }
